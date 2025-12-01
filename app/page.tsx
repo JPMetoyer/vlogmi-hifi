@@ -32,7 +32,7 @@ export default function Dashboard() {
     {
       id: 1,
       title: "Summer Beach Vlog - Best Moment",
-      thumbnail: "/beach-sunset-beautiful.jpg",
+      thumbnail: "/beach.webp",
       duration: "0:34",
       status: "Ready",
       views: "45.2K",
@@ -41,7 +41,7 @@ export default function Dashboard() {
     {
       id: 2,
       title: "Morning Routine Hack",
-      thumbnail: "/morning-coffee-lifestyle.jpg",
+      thumbnail: "/morning.avif",
       duration: "0:28",
       status: "Ready",
       views: "32.1K",
@@ -50,7 +50,7 @@ export default function Dashboard() {
     {
       id: 3,
       title: "Cooking Adventure Highlight",
-      thumbnail: "/cooking-food-delicious.jpg",
+      thumbnail: "/cooking.jpg",
       duration: "0:41",
       status: "Processing",
       views: "-",

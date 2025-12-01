@@ -19,7 +19,7 @@ export default function VideosPage() {
       duration: "12:34",
       status: "completed",
       clipsGenerated: 5,
-      thumbnail: "/beach-vlog-thumbnail.jpg",
+      thumbnail: "/beach.webp",
     },
     {
       id: 2,
@@ -29,7 +29,7 @@ export default function VideosPage() {
       status: "processing",
       clipsGenerated: 0,
       progress: 67,
-      thumbnail: "/morning-coffee-video.jpg",
+      thumbnail: "/morning.avif",
     },
     {
       id: 3,
@@ -38,7 +38,7 @@ export default function VideosPage() {
       duration: "15:22",
       status: "queued",
       clipsGenerated: 0,
-      thumbnail: "/cooking-video-thumbnail.png",
+      thumbnail: "/cooking.jpg",
     },
   ]
 
