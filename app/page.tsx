@@ -1,103 +1,182 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import { useState, useEffect } from "react"
+import { DashboardLayout } from "@/components/dashboard-layout"
+import { OnboardingCarousel } from "@/components/onboarding-carousel"
+import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Play, Download, Share2, Sparkles, TrendingUp } from "lucide-react"
+
+export default function Dashboard() {
+  const [showOnboarding, setShowOnboarding] = useState(false)
+
+  useEffect(() => {
+    const hasSeenOnboarding = localStorage.getItem("hasSeenOnboarding")
+    if (!hasSeenOnboarding) {
+      setShowOnboarding(true)
+    }
+  }, [])
+
+  const handleCloseOnboarding = () => {
+    setShowOnboarding(false)
+    localStorage.setItem("hasSeenOnboarding", "true")
+  }
+
+  const quickStats = [
+    { label: "Clips Ready", value: "23", trend: "+12 this week", icon: Sparkles },
+    { label: "Total Views", value: "1.2M", trend: "+150K", icon: TrendingUp },
+  ]
+
+  const recentClips = [
+    {
+      id: 1,
+      title: "Summer Beach Vlog - Best Moment",
+      thumbnail: "/beach-sunset-beautiful.jpg",
+      duration: "0:34",
+      status: "Ready",
+      views: "45.2K",
+      engagement: "8.3%",
+    },
+    {
+      id: 2,
+      title: "Morning Routine Hack",
+      thumbnail: "/morning-coffee-lifestyle.jpg",
+      duration: "0:28",
+      status: "Ready",
+      views: "32.1K",
+      engagement: "7.1%",
+    },
+    {
+      id: 3,
+      title: "Cooking Adventure Highlight",
+      thumbnail: "/cooking-food-delicious.jpg",
+      duration: "0:41",
+      status: "Processing",
+      views: "-",
+      engagement: "-",
+    },
+  ]
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <DashboardLayout>
+      {showOnboarding && <OnboardingCarousel onClose={handleCloseOnboarding} />}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-4xl font-bold mb-2">Your AI Clips 🎬</h1>
+          <p className="text-muted-foreground text-lg">Your videos, transformed into viral moments</p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+
+        <div className="grid grid-cols-2 gap-4">
+          {quickStats.map((stat) => {
+            const Icon = stat.icon
+            return (
+              <Card key={stat.label} className="p-6 border-2 hover:border-primary/50 transition-colors">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-1">{stat.label}</p>
+                    <p className="text-4xl font-bold mb-1">{stat.value}</p>
+                    <p className="text-xs text-accent font-medium">{stat.trend}</p>
+                  </div>
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-primary" />
+                  </div>
+                </div>
+              </Card>
+            )
+          })}
+        </div>
+
+        <div>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold">Recent Clips</h2>
+            <Button variant="outline" onClick={() => setShowOnboarding(true)}>
+              Show Tutorial
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4">
+            {recentClips.map((clip) => (
+              <Card key={clip.id} className="overflow-hidden group hover:shadow-xl transition-shadow">
+                <div className="relative">
+                  <img
+                    src={clip.thumbnail || "/placeholder.svg"}
+                    alt={clip.title}
+                    className="w-full aspect-video object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <Button size="lg" className="rounded-full w-14 h-14 p-0">
+                      <Play className="w-6 h-6 fill-current" />
+                    </Button>
+                  </div>
+                  <Badge className="absolute top-2 right-2 bg-background/90 text-foreground border">
+                    {clip.duration}
+                  </Badge>
+                  <Badge
+                    className={cn(
+                      "absolute top-2 left-2",
+                      clip.status === "Ready"
+                        ? "bg-accent text-accent-foreground"
+                        : "bg-secondary text-secondary-foreground",
+                    )}
+                  >
+                    {clip.status}
+                  </Badge>
+                </div>
+
+                <div className="p-4 space-y-3">
+                  <h3 className="font-semibold line-clamp-2 leading-snug">{clip.title}</h3>
+
+                  {clip.status === "Ready" && (
+                    <div className="flex gap-2 text-xs text-muted-foreground">
+                      <span>{clip.views} views</span>
+                      <span>•</span>
+                      <span>{clip.engagement} engagement</span>
+                    </div>
+                  )}
+
+                  {clip.status === "Ready" ? (
+                    <div className="flex gap-2">
+                      <Button size="sm" variant="outline" className="flex-1 gap-2 bg-transparent">
+                        <Download className="w-4 h-4" />
+                        Download
+                      </Button>
+                      <Button size="sm" className="flex-1 gap-2 bg-primary">
+                        <Share2 className="w-4 h-4" />
+                        Share
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
+                        <div className="h-full w-2/3 bg-primary rounded-full animate-pulse" />
+                      </div>
+                      <span>67%</span>
+                    </div>
+                  )}
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        <Card className="p-8 text-center bg-gradient-to-br from-primary/5 to-secondary/5 border-2 border-dashed">
+          <div className="max-w-xl mx-auto space-y-4">
+            <div className="text-5xl">🎥</div>
+            <h3 className="text-2xl font-bold">Ready to Create More Magic?</h3>
+            <p className="text-muted-foreground">Upload a new video and let AI find the best moments for you</p>
+            <Button size="lg" className="gap-2 bg-primary hover:bg-primary/90">
+              <Sparkles className="w-5 h-5" />
+              Upload Video
+            </Button>
+          </div>
+        </Card>
+      </div>
+    </DashboardLayout>
+  )
+}
+
+function cn(...classes: string[]) {
+  return classes.filter(Boolean).join(" ")
 }
