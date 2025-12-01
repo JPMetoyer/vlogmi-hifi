@@ -47,10 +47,10 @@ export function TopBar() {
             onClose={() => {
               console.log("[v0] Closing upload modal")
               setShowUploadModal(false)
-            }}
-          />
+            } } open={false}          />
         </>
       )}
     </>
   )
 }
+
